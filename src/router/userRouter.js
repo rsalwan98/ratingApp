@@ -60,13 +60,18 @@ router.post('/userRating', async (req,res) => {
 
 router.get('/userRating',async(req,res) => {
 
-    const customer =await User.findOne({
-        userName : req.body.userName
-    })
+    try{
+        const customer =await User.findOne({
+            userName : req.body.userName
+        })
 
-    res.send({
-        rating : customer.avgRating
-    })
+        res.send({
+            rating : customer.avgRating
+        })
+    }catch(err){
+        res.send(err);
+    }
+
 })
 
 module.exports = router
